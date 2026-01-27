@@ -7,6 +7,7 @@ import com.example.wizipedia_android.types.Spells
 import com.example.wizipedia_android.types.Book
 import com.example.wizipedia_android.types.Books
 import com.example.wizipedia_android.types.Characters
+import com.example.wizipedia_android.types.Character
 import com.example.wizipedia_android.types.Houses
 
 // Third-Party libraries
