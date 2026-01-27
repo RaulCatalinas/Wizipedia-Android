@@ -12,12 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+// Navigation
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
+
 // Components
 import com.example.wizipedia_android.components.CategoryCard
+import com.example.wizipedia_android.components.NavigationKeys
 import com.example.wizipedia_android.enums.Category
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(backStack: NavBackStack<NavKey>) {
     Scaffold(modifier = Modifier.fillMaxSize()) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -33,10 +38,22 @@ fun HomeScreen() {
                     category = category,
                     onClick = {
                         when (category) {
-                            Category.Characters -> println("Searching characters...")
-                            Category.Houses -> println("Searching houses...")
-                            Category.Spells -> println("Searching spells...")
-                            Category.Media -> println("Searching media...")
+                            Category.Characters -> {
+                                backStack.clear()
+                                backStack.add(NavigationKeys.Characters)
+                            }
+                            Category.Houses -> {
+                                backStack.clear()
+                                backStack.add(NavigationKeys.Houses)
+                            }
+                            Category.Spells -> {
+                                backStack.clear()
+                                backStack.add(NavigationKeys.Spells)
+                            }
+                            Category.Media -> {
+                                backStack.clear()
+                                backStack.add(NavigationKeys.Media)
+                            }
                         }
                     }
                 )
@@ -44,5 +61,3 @@ fun HomeScreen() {
         }
     }
 }
-
-

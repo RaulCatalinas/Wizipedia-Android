@@ -137,7 +137,7 @@ fun Navigation() {
             backStack = backStack,
             onBack = { backStack.removeLastOrNull() },
             entryProvider = entryProvider {
-                entry(NavigationKeys.NavigationMenu) { HomeScreen() }
+                entry(NavigationKeys.NavigationMenu) { HomeScreen(backStack = backStack) }
                 entry(NavigationKeys.Characters) { CharactersScreen() }
                 entry(NavigationKeys.Houses) { HousesScreen() }
                 entry(NavigationKeys.Spells) { SpellsScreen() }
