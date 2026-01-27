@@ -38,6 +38,7 @@ fun CategoryCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            RenderSvg(category.iconId)
             Text(category.title, color = Color.White)
             Text(category.subtitle, color = Color.Gray)
         }
