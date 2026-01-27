@@ -1,6 +1,8 @@
 package com.example.wizipedia_android.components
 
 // Compose
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +35,11 @@ import com.example.wizipedia_android.ui.screens.SpellsScreen
 fun Navigation() {
     val backStack = rememberNavBackStack(NavigationKeys.NavigationMenu)
 
+    BackHandler(enabled = backStack.lastOrNull() != NavigationKeys.NavigationMenu) {
+        backStack.clear()
+        backStack.add(NavigationKeys.NavigationMenu)
+    }
+
     Scaffold(
         bottomBar = {
             BottomAppBar {
@@ -41,7 +48,31 @@ fun Navigation() {
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .clickable {
+                                backStack.clear()
+                                backStack.add(NavigationKeys.NavigationMenu)
+                            }
+                            .padding(8.dp)
+                    ) {
+                        RenderSvg(
+                            R.drawable.home,
+                            modifier = Modifier.size(20.dp),
+                            colorTint = Color.Black
+                        )
+                        Text("Home")
+                    }
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .clickable {
+                                backStack.clear()
+                                backStack.add(NavigationKeys.Characters)
+                            }
+                            .padding(8.dp)
+                    ) {
                         RenderSvg(
                             R.drawable.characters,
                             modifier = Modifier.size(20.dp),
@@ -50,7 +81,13 @@ fun Navigation() {
                         Text("Characters")
                     }
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .clickable {
+                                backStack.clear()
+                                backStack.add(NavigationKeys.Houses)
+                            }
+                            .padding(8.dp)
                     ) {
                         RenderSvg(
                             R.drawable.houses,
@@ -60,7 +97,13 @@ fun Navigation() {
                         Text("Houses")
                     }
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .clickable {
+                                backStack.clear()
+                                backStack.add(NavigationKeys.Spells)
+                            }
+                            .padding(8.dp)
                     ) {
                         RenderSvg(
                             R.drawable.spells,
@@ -70,7 +113,13 @@ fun Navigation() {
                         Text("Spells")
                     }
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .clickable {
+                                backStack.clear()
+                                backStack.add(NavigationKeys.Media)
+                            }
+                            .padding(8.dp)
                     ) {
                         RenderSvg(
                             R.drawable.media,
