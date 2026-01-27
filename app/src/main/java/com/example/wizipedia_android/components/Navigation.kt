@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 // Navigation 3
@@ -34,8 +35,9 @@ import com.example.wizipedia_android.ui.screens.SpellsScreen
 @Composable
 fun Navigation() {
     val backStack = rememberNavBackStack(NavigationKeys.NavigationMenu)
+    val currentScreen = backStack.lastOrNull()
 
-    BackHandler(enabled = backStack.lastOrNull() != NavigationKeys.NavigationMenu) {
+    BackHandler(enabled = currentScreen != NavigationKeys.NavigationMenu) {
         backStack.clear()
         backStack.add(NavigationKeys.NavigationMenu)
     }
@@ -48,86 +50,48 @@ fun Navigation() {
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .clickable {
-                                backStack.clear()
-                                backStack.add(NavigationKeys.NavigationMenu)
-                            }
-                            .padding(8.dp)
-                    ) {
-                        RenderSvg(
-                            R.drawable.home,
-                            modifier = Modifier.size(20.dp),
-                            colorTint = Color.Black
-                        )
-                        Text("Home")
-                    }
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .clickable {
-                                backStack.clear()
-                                backStack.add(NavigationKeys.Characters)
-                            }
-                            .padding(8.dp)
-                    ) {
-                        RenderSvg(
-                            R.drawable.characters,
-                            modifier = Modifier.size(20.dp),
-                            colorTint = Color.Black
-                        )
-                        Text("Characters")
-                    }
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .clickable {
-                                backStack.clear()
-                                backStack.add(NavigationKeys.Houses)
-                            }
-                            .padding(8.dp)
-                    ) {
-                        RenderSvg(
-                            R.drawable.houses,
-                            modifier = Modifier.size(20.dp),
-                            colorTint = Color.Black
-                        )
-                        Text("Houses")
-                    }
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .clickable {
-                                backStack.clear()
-                                backStack.add(NavigationKeys.Spells)
-                            }
-                            .padding(8.dp)
-                    ) {
-                        RenderSvg(
-                            R.drawable.spells,
-                            modifier = Modifier.size(20.dp),
-                            colorTint = Color.Black
-                        )
-                        Text("Spells")
-                    }
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .clickable {
-                                backStack.clear()
-                                backStack.add(NavigationKeys.Media)
-                            }
-                            .padding(8.dp)
-                    ) {
-                        RenderSvg(
-                            R.drawable.media,
-                            modifier = Modifier.size(20.dp),
-                            colorTint = Color.Black
-                        )
-                        Text("Media")
-                    }
+                    BottomNavItem(
+                        icon = R.drawable.home,
+                        label = "Home",
+                        isSelected = currentScreen == NavigationKeys.NavigationMenu,
+                        onClick = {}
+                    )
+                    BottomNavItem(
+                        icon = R.drawable.characters,
+                        label = "Characters",
+                        isSelected = currentScreen == NavigationKeys.Characters,
+                        onClick = {
+                            backStack.clear()
+                            backStack.add(NavigationKeys.Characters)
+                        }
+                    )
+                    BottomNavItem(
+                        icon = R.drawable.houses,
+                        label = "Houses",
+                        isSelected = currentScreen == NavigationKeys.Houses,
+                        onClick = {
+                            backStack.clear()
+                            backStack.add(NavigationKeys.Houses)
+                        }
+                    )
+                    BottomNavItem(
+                        icon = R.drawable.spells,
+                        label = "Spells",
+                        isSelected = currentScreen == NavigationKeys.Spells,
+                        onClick = {
+                            backStack.clear()
+                            backStack.add(NavigationKeys.Spells)
+                        }
+                    )
+                    BottomNavItem(
+                        icon = R.drawable.media,
+                        label = "Media",
+                        isSelected = currentScreen == NavigationKeys.Media,
+                        onClick = {
+                            backStack.clear()
+                            backStack.add(NavigationKeys.Media)
+                        }
+                    )
                 }
             }
         }
