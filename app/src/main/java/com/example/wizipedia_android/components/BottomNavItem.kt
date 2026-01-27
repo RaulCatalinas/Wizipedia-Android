@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BottomNavItem(
-    icon: Int,
+    iconId: Int,
     label: String,
     isSelected: Boolean,
     onClick: () -> Unit
@@ -26,9 +26,9 @@ fun BottomNavItem(
             .padding(8.dp)
     ) {
         RenderSvg(
-            icon,
+            iconId,
             modifier = Modifier.size(20.dp),
-            colorTint = if (isSelected) Color(0xFFD4AF37) else Color.Gray // Dorado si está seleccionado
+            colorTint = if (isSelected) Color(0xFFD4AF37) else Color.Gray
         )
         Text(
             text = label,

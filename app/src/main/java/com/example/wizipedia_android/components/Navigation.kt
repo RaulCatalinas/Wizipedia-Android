@@ -2,22 +2,15 @@ package com.example.wizipedia_android.components
 
 // Compose
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 
 // Navigation 3
 import androidx.navigation3.runtime.entryProvider
@@ -51,13 +44,16 @@ fun Navigation() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     BottomNavItem(
-                        icon = R.drawable.home,
+                        iconId = R.drawable.home,
                         label = "Home",
                         isSelected = currentScreen == NavigationKeys.NavigationMenu,
-                        onClick = {}
+                        onClick = {
+                            backStack.clear()
+                            backStack.add(NavigationKeys.NavigationMenu)
+                        }
                     )
                     BottomNavItem(
-                        icon = R.drawable.characters,
+                        iconId = R.drawable.characters,
                         label = "Characters",
                         isSelected = currentScreen == NavigationKeys.Characters,
                         onClick = {
@@ -66,7 +62,7 @@ fun Navigation() {
                         }
                     )
                     BottomNavItem(
-                        icon = R.drawable.houses,
+                        iconId = R.drawable.houses,
                         label = "Houses",
                         isSelected = currentScreen == NavigationKeys.Houses,
                         onClick = {
@@ -75,7 +71,7 @@ fun Navigation() {
                         }
                     )
                     BottomNavItem(
-                        icon = R.drawable.spells,
+                        iconId = R.drawable.spells,
                         label = "Spells",
                         isSelected = currentScreen == NavigationKeys.Spells,
                         onClick = {
@@ -84,7 +80,7 @@ fun Navigation() {
                         }
                     )
                     BottomNavItem(
-                        icon = R.drawable.media,
+                        iconId = R.drawable.media,
                         label = "Media",
                         isSelected = currentScreen == NavigationKeys.Media,
                         onClick = {
