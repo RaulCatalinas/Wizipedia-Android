@@ -80,6 +80,7 @@ fun CharacterImage(
                     modifier = Modifier.size(32.dp)
                 )
             }
+
             Log.e("CharacterImage", "Error loading image: $imageUrl", it.result.throwable)
         }
     )
