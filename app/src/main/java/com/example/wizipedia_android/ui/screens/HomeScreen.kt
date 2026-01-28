@@ -34,11 +34,10 @@ fun HomeScreen(backStack: NavBackStack<NavKey>) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(16.dp),
+                .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Título
             Text(
                 text = "Explore the\nWizarding World",
                 style = MaterialTheme.typography.headlineMedium,
@@ -46,7 +45,6 @@ fun HomeScreen(backStack: NavBackStack<NavKey>) {
                 textAlign = TextAlign.Center
             )
 
-            // Subtítulo
             Text(
                 text = "Discover characters, spells, houses, and more\nfrom the magical universe.",
                 color = Color.Gray,
@@ -55,7 +53,6 @@ fun HomeScreen(backStack: NavBackStack<NavKey>) {
                 textAlign = TextAlign.Center
             )
 
-            // Grid de categorías
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 modifier = Modifier.fillMaxSize(),
@@ -71,14 +68,17 @@ fun HomeScreen(backStack: NavBackStack<NavKey>) {
                                     backStack.clear()
                                     backStack.add(NavigationKeys.Characters)
                                 }
+
                                 Category.Houses -> {
                                     backStack.clear()
                                     backStack.add(NavigationKeys.Houses)
                                 }
+
                                 Category.Spells -> {
                                     backStack.clear()
                                     backStack.add(NavigationKeys.Spells)
                                 }
+
                                 Category.Media -> {
                                     backStack.clear()
                                     backStack.add(NavigationKeys.Media)
