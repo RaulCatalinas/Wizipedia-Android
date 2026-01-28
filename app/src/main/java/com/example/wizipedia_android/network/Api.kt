@@ -17,33 +17,33 @@ import retrofit2.http.Path
 
 
 interface Api {
-    @GET("/characters")
+    @GET("characters")
     suspend fun getAllCharacters(): Characters
 
-    @GET("/characters/{character_name}")
+    @GET("characters/{character_name}")
     suspend fun getCharacter(@Path("character_name") characterName: String): Character
 
-    @GET("/houses")
+    @GET("houses")
     suspend fun getAllHouses(): Houses
 
-    @GET("/houses/{house_name}")
+    @GET("houses/{house_name}")
     suspend fun getCharactersForHouse(@Path("house_name") houseName: String): Characters
 
-    @GET("/spells")
+    @GET("spells")
     suspend fun getAllSpells(): Spells
 
-    @GET("/spells/{spell_name}")
+    @GET("spells/{spell_name}")
     suspend fun getSpell(@Path("spell_name") spellName: String): Spell
 
-    @GET("/movies")
+    @GET("movies")
     suspend fun getAllMovies(): Movies
 
-    @GET("/movies/{movie_name}")
+    @GET("movies/{movie_name}")
     suspend fun getMovie(@Path("movie_name") movieName: String): Movie
 
     @GET("books")
     suspend fun getAllBooks(): Books
 
-    @GET("/books/{book_name}")
+    @GET("books/{book_name}")
     suspend fun getBook(@Path("book_name") bookName: String): Book
 }
