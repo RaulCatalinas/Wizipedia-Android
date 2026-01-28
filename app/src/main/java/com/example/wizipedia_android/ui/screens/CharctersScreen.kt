@@ -1,5 +1,6 @@
 package com.example.wizipedia_android.ui.screens
 
+// Compose
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,8 +17,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+
+// Network
 import com.example.wizipedia_android.network.ApiManager
+
+// Types
 import com.example.wizipedia_android.types.Characters
+
+// Screens
 import com.example.wizipedia_android.ui.screens.characters.CharacterContentView
 
 @Composable
@@ -52,12 +59,15 @@ fun CharactersScreen() {
                     CircularProgressIndicator()
                     Text("Loading characters...", modifier = Modifier.padding(top = 16.dp))
                 }
+
                 error != null -> {
                     Text("Error: $error")
                 }
+
                 characters == null -> {
                     Text("No characters found")
                 }
+
                 else -> {
                     CharacterContentView(characters!!)
                 }
