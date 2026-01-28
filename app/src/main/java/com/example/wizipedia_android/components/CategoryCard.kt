@@ -45,7 +45,7 @@ fun CategoryCard(
                 alignment = Alignment.CenterVertically
             )
         ) {
-            RenderSvg(category.iconId)
+            RenderLocalImage(category.iconId)
             Text(category.title, color = Color.White, textAlign = TextAlign.Center)
             Text(category.subtitle, color = Color.Gray, textAlign = TextAlign.Center)
         }

@@ -2,6 +2,7 @@ package com.example.wizipedia_android.ui.screens.characters
 
 // Compose
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 // Components
-import com.example.wizipedia_android.components.CharacterImage  // ← Importa tu componente
+import com.example.wizipedia_android.components.CharacterImage
 
 // Enums
 import com.example.wizipedia_android.enums.House
@@ -38,7 +39,7 @@ import com.example.wizipedia_android.enums.House
 import com.example.wizipedia_android.types.Characters
 
 @Composable
-fun CharacterContentView(characters: Characters){
+fun CharacterContentView(characters: Characters) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -74,7 +75,9 @@ fun CharacterContentView(characters: Characters){
         ) {
             items(items = characters, key = { it.id }) { character ->
                 Card(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(onClick = { println("Getting into the details...") })
                 ) {
                     Row(
                         modifier = Modifier
@@ -116,7 +119,7 @@ fun CharacterContentView(characters: Characters){
                                     .size(8.dp)
                                     .clip(CircleShape)
                                     .background(
-                                        if(character.alive) Color(0xFF4CAF50)
+                                        if (character.alive) Color(0xFF4CAF50)
                                         else Color(0xFFF44336)
                                     )
                             )

@@ -25,7 +25,7 @@ fun BottomNavItem(
             .clickable(onClick = onClick)
             .padding(8.dp)
     ) {
-        RenderSvg(
+        RenderLocalImage(
             iconId,
             modifier = Modifier.size(20.dp),
             colorTint = if (isSelected) Color(0xFFD4AF37) else Color.Gray
