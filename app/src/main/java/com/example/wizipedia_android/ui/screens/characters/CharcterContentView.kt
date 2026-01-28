@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 
 // Components
 import com.example.wizipedia_android.components.CharacterImage
+import com.example.wizipedia_android.components.Filters
 
 // Enums
 import com.example.wizipedia_android.enums.House
@@ -67,7 +68,7 @@ fun CharacterContentView(characters: Characters) {
         }
 
         // TODO: add search bar
-        // TODO: add filters
+        Filters()
 
         LazyColumn(
             modifier = Modifier.fillMaxHeight(),
