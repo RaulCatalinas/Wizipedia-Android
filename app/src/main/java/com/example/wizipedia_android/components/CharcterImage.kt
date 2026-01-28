@@ -45,41 +45,42 @@ fun CharacterImage(
 
         return
     }
-        SubcomposeAsyncImage(
-            model = imageUrl,
-            contentDescription = contentDescription,
-            contentScale = ContentScale.Crop,
-            modifier = modifier
-                .size(size)
-                .clip(CircleShape),
-            loading = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color(0xFFE0E0E0)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        strokeWidth = 2.dp
-                    )
-                }
-            },
-            error = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color(0xFFE0E0E0)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = "Error loading image",
-                        tint = Color(0xFF9E9E9E),
-                        modifier = Modifier.size(32.dp)
-                    )
-                }
-                Log.e("CharacterImage", "Error loading image: $imageUrl", it.result.throwable)
+
+    SubcomposeAsyncImage(
+        model = imageUrl,
+        contentDescription = contentDescription,
+        contentScale = ContentScale.Crop,
+        modifier = modifier
+            .size(size)
+            .clip(CircleShape),
+        loading = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color(0xFFE0E0E0)),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(24.dp),
+                    strokeWidth = 2.dp
+                )
             }
-        )
-    }
+        },
+        error = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color(0xFFE0E0E0)),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = "Error loading image",
+                    tint = Color(0xFF9E9E9E),
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+            Log.e("CharacterImage", "Error loading image: $imageUrl", it.result.throwable)
+        }
+    )
+}
