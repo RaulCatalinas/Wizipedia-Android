@@ -1,6 +1,9 @@
 package com.example.wizipedia_android.components
 
+// Android
 import android.util.Log
+
+// Compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +21,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+
+// Coil
 import coil3.compose.SubcomposeAsyncImage
 
 @Composable
