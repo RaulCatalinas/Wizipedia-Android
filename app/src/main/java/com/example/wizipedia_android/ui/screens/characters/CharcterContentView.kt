@@ -45,7 +45,7 @@ import com.example.wizipedia_android.types.Characters
 import com.example.wizipedia_android.ui.view_models.CharactersViewModel
 
 @Composable
-fun CharacterContentView(characters: Characters, viewModel: CharactersViewModel) {
+fun CharactersContentView(characters: Characters, viewModel: CharactersViewModel) {
     val listState = rememberLazyListState()
 
     LaunchedEffect(characters) {

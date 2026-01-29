@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 // Screens
-import com.example.wizipedia_android.ui.screens.characters.CharacterContentView
+import com.example.wizipedia_android.ui.screens.characters.CharactersContentView
 
 // ViewModels
 import com.example.wizipedia_android.ui.view_models.CharactersUiState
@@ -69,7 +69,7 @@ fun CharactersScreen(viewModel: CharactersViewModel = viewModel()) {
                 }
 
                 is CharactersUiState.Success -> {
-                    CharacterContentView(state.characters!!, viewModel)
+                    CharactersContentView(state.characters!!, viewModel)
                 }
             }
         }
