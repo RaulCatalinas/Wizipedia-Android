@@ -17,11 +17,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-// Constants
-import com.example.wizipedia_android.constants.filters
+// Models
+import com.example.wizipedia_android.models.CharactersFilter
+
+// View models
+import com.example.wizipedia_android.ui.view_models.CharactersViewModel
 
 @Composable
-fun Filters() {
+fun Filters(viewModel: CharactersViewModel) {
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
@@ -31,27 +34,17 @@ fun Filters() {
             alignment = Alignment.CenterHorizontally
         )
     ) {
-        item {
+        items(items = CharactersFilter.getAllFilters()) { filter ->
             Text(
-                "All",
+                text = filter.displayName,
                 color = Color.White,
                 modifier = Modifier
                     .clip(RoundedCornerShape(100.dp))
                     .background(Color.Gray)
                     .padding(horizontal = 16.dp, vertical = 4.dp)
-                    .clickable(onClick = { println("Restoring filters...") })
-            )
-        }
-
-        items(items = filters) { filter ->
-            Text(
-                filter,
-                color = Color.White,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(100.dp))
-                    .background(Color.Gray)
-                    .padding(horizontal = 16.dp, vertical = 4.dp)
-                    .clickable(onClick = { println("Filtering by $filter...") })
+                    .clickable {
+                        viewModel.applyFilter(filter)
+                    }
             )
         }
     }

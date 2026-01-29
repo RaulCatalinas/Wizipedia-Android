@@ -2,73 +2,74 @@ package com.example.wizipedia_android.ui.screens
 
 // Compose
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
-// Network
-import com.example.wizipedia_android.network.ApiManager
-
-// Types
-import com.example.wizipedia_android.types.Characters
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 // Screens
 import com.example.wizipedia_android.ui.screens.characters.CharacterContentView
 
+// ViewModels
+import com.example.wizipedia_android.ui.view_models.CharactersUiState
+import com.example.wizipedia_android.ui.view_models.CharactersViewModel
+
+
 @Composable
-fun CharactersScreen() {
-    var characters by remember { mutableStateOf<Characters?>(null) }
-    var isLoading by remember { mutableStateOf(true) }
-    var error by remember { mutableStateOf<String?>(null) }
+fun CharactersScreen(viewModel: CharactersViewModel = viewModel()) {
+    val uiState by viewModel.uiState.collectAsState()
 
-    LaunchedEffect(Unit) {
-        try {
-            isLoading = true
-            characters = ApiManager.getAllCharacters()
-            isLoading = false
-        } catch (e: Exception) {
-            error = e.message
-            characters = null
-            isLoading = false
-        }
-    }
-
-    Scaffold(modifier = Modifier.fillMaxSize()) {
-        Column(
+    Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+                .padding(paddingValues)
         ) {
-            when {
-                isLoading -> {
-                    CircularProgressIndicator()
-                    Text("Loading characters...", modifier = Modifier.padding(top = 16.dp))
+            when (val state = uiState) {
+                is CharactersUiState.Loading -> {
+                    // Estado de carga
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        CircularProgressIndicator()
+                        Text(
+                            "Loading characters...",
+                            modifier = Modifier.padding(top = 16.dp)
+                        )
+                    }
                 }
 
-                error != null -> {
-                    Text("Error: $error")
+                is CharactersUiState.Error -> {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text("Error: ${state.message}")
+                        Button(
+                            onClick = { viewModel.retry() },
+                            modifier = Modifier.padding(top = 16.dp)
+                        ) {
+                            Text("Retry")
+                        }
+                    }
                 }
 
-                characters == null -> {
-                    Text("No characters found")
-                }
-
-                else -> {
-                    CharacterContentView(characters!!)
+                is CharactersUiState.Success -> {
+                    CharacterContentView(state.characters!!, viewModel)
                 }
             }
         }

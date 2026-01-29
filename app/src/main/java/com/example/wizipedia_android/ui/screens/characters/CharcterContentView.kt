@@ -16,11 +16,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,8 +41,22 @@ import com.example.wizipedia_android.enums.House
 // Types
 import com.example.wizipedia_android.types.Characters
 
+// View models
+import com.example.wizipedia_android.ui.view_models.CharactersViewModel
+
 @Composable
-fun CharacterContentView(characters: Characters) {
+fun CharacterContentView(characters: Characters, viewModel: CharactersViewModel) {
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(characters) {
+        val currentPosition = listState.firstVisibleItemIndex
+
+        when {
+            currentPosition <= 30 -> listState.animateScrollToItem(0)
+            else -> listState.scrollToItem(0)
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -68,9 +84,10 @@ fun CharacterContentView(characters: Characters) {
         }
 
         // TODO: add search bar
-        Filters()
+        Filters(viewModel)
 
         LazyColumn(
+            state = listState,
             modifier = Modifier.fillMaxHeight(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
