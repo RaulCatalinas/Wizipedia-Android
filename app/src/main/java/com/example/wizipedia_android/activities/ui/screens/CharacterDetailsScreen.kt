@@ -1,4 +1,4 @@
-package com.example.wizipedia_android.ui.screens
+package com.example.wizipedia_android.activities.ui.screens
 
 // Compose
 import androidx.compose.foundation.layout.Box
@@ -18,14 +18,22 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.wizipedia_android.ui.screens.character.CharacterDetailsContent
-import com.example.wizipedia_android.ui.view_models.CharacterUiState
+import com.example.wizipedia_android.activities.ui.screens.character.CharacterDetailsContent
+import com.example.wizipedia_android.activities.view_models.CharacterUiState
 
 // View models
-import com.example.wizipedia_android.ui.view_models.CharacterViewModel
+import com.example.wizipedia_android.activities.view_models.CharacterViewModel
 
 @Composable
-fun CharacterDetailScreen(characterName: String) {
+fun CharacterDetailScreen(characterName: String?) {
+    if (characterName.isNullOrBlank()) {
+        Column {
+            Text("An error has occurred while obtaining the details of the character. Please try again later.")
+        }
+
+        return
+    }
+
     val viewModel: CharacterViewModel = viewModel(
         factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")

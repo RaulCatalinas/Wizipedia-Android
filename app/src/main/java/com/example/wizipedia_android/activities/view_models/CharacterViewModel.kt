@@ -1,4 +1,4 @@
-package com.example.wizipedia_android.ui.view_models
+package com.example.wizipedia_android.activities.view_models
 
 // Androidx
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,6 @@ import com.example.wizipedia_android.network.ApiManager
 
 // Types
 import com.example.wizipedia_android.types.Character
-import com.example.wizipedia_android.types.Characters
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

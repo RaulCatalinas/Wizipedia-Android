@@ -1,5 +1,8 @@
 package com.example.wizipedia_android.ui.screens.characters
 
+// Android
+import android.content.Intent
+
 // Compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,9 +30,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.wizipedia_android.activities.CharacterDetailsActivity
 
 // Components
 import com.example.wizipedia_android.components.CharacterImage
@@ -46,6 +51,7 @@ import com.example.wizipedia_android.ui.view_models.CharactersViewModel
 
 @Composable
 fun CharactersContentView(characters: Characters, viewModel: CharactersViewModel) {
+    val context = LocalContext.current
     val listState = rememberLazyListState()
 
     LaunchedEffect(characters) {
@@ -95,7 +101,13 @@ fun CharactersContentView(characters: Characters, viewModel: CharactersViewModel
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable(onClick = { println("Getting into the details...") })
+                        .clickable {
+                            val intent = Intent(context, CharacterDetailsActivity::class.java)
+
+                            intent.putExtra("characterName", character.name)
+
+                            context.startActivity(intent)
+                        }
                 ) {
                     Row(
                         modifier = Modifier

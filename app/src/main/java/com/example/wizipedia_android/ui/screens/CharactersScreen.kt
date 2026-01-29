@@ -69,7 +69,7 @@ fun CharactersScreen(viewModel: CharactersViewModel = viewModel()) {
                 }
 
                 is CharactersUiState.Success -> {
-                    CharactersContentView(state.characters!!, viewModel)
+                    CharactersContentView(state.characters, viewModel)
                 }
             }
         }
